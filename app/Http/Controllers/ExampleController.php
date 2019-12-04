@@ -34,7 +34,7 @@ class ExampleController extends Controller
     private function Api_post(Request $req)
     {
         $test = $req->test ?? 0;
-        dd($test);
+        
         return r_result1(200, '测试post');
     }
 
