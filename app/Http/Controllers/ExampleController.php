@@ -28,13 +28,13 @@ class ExampleController extends Controller
             'sex'  => '男'
         ];
 
-        return r_result1(200, '获取成功',$data);
+        return api_result(200, '获取成功',$data);
     }
 
     private function Api_post(Request $req)
     {
         $test = $req->test ?? 0;
-        
+
         return r_result1(200, '测试post');
     }
 

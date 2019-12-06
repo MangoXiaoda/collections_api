@@ -60,6 +60,28 @@ function e_result ($code, $data = [], $desc = '') {
 }
 
 /**
+ * 返回数据
+ * @param int $code 返回码
+ * @param string $desc 描述
+ * @param array $data 结果数据
+ * @param bool $toJson 是否转换为JSON格式
+ * @return mixed array | string  结果数据
+ */
+function api_result ($code, $desc = '', $data = [], $toJson = false) {
+    $arr = [
+        'status' => [
+            'code' => $code,
+            'desc' => $desc,
+        ],
+        'data'   => $data,
+    ];
+    if (!$toJson)
+        return $arr;
+
+    return LexueJencode($arr);
+}
+
+/**
  * 退出并返回结果
  * @param $code 返回码
  * @param string $desc 描述

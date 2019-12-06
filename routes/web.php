@@ -18,4 +18,8 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'v1', 'middleware' => ['ApiConfig']], function () use ($router) {
     $router->get('/test', 'ExampleController@get');
     $router->post('/post', 'ExampleController@post');
+
+    # 添加物品接口
+    $router->post('/addCard', 'GoodsController@post');
+
 });
