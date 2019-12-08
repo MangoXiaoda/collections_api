@@ -19,7 +19,29 @@ $router->group(['prefix' => 'v1', 'middleware' => ['ApiConfig']], function () us
     $router->get('/test', 'ExampleController@get');
     $router->post('/post', 'ExampleController@post');
 
+    # 获取卡片列表接口
+    $router->post('/cardlist', 'GoodsController@post');
+
+    # 添加卡片信息接口
+    $router->post('/addcard', 'GoodsController@post');
+
+    # 修改卡片信息接口
+    $router->post('/editcard', 'GoodsController@post');
+
+    # 删除卡片信息接口
+    $router->post('/delcard', 'GoodsController@post');
+
+    # 物品列表接口
+    $router->post('/goodslist', 'GoodsController@post');
+
     # 添加物品接口
-    $router->post('/addCard', 'GoodsController@post');
+    $router->post('/addgoods', 'GoodsController@post');
+
+    # 修改物品接口
+    $router->post('/editgoods', 'GoodsController@post');
+
+    # 删除物品接口
+    $router->post('/delgoods', 'GoodsController@post');
+
 
 });
