@@ -43,5 +43,16 @@ $router->group(['prefix' => 'v1', 'middleware' => ['ApiConfig']], function () us
     # 删除物品接口
     $router->post('/delgoods', 'GoodsController@post');
 
+    # 获取标签列表接口
+    $router->post('/taglist', 'TagController@post');
+
+    # 添加标签接口
+    $router->post('/addtag', 'TagController@post');
+
+    # 修改标签接口
+    $router->post('/edittag', 'TagController@post');
+
+    # 删除标签接口
+    $router->post('/deltag', 'TagController@post');
 
 });
