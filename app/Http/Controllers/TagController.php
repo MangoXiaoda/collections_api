@@ -23,6 +23,7 @@ class TagController extends Controller
         $dev_info = $req->dev_info ?? '';
         $uid      = $req->uid ?? 0;
         $cd_id    = $req->cd_id ?? 0;
+        $tag_name = $req->tag_name ?? '';
 
         if (!$dev_info && !$uid)
             return api_result(201, '缺少{dev_info}或会员编号参数');
@@ -32,6 +33,9 @@ class TagController extends Controller
         }
 
         $list = cl_tag::where('parentid', $cd_id)
+            ->when($tag_name, function($query) use($tag_name){
+                $query->where('tag_name', 'like', '%'.$tag_name.'%');
+            })
             ->get()
             ->toArray();
 

@@ -30,6 +30,7 @@ class GoodsController extends Controller
     {
         $dev_info = $req->dev_info ?? '';
         $uid      = $req->uid ?? 0;
+        $cd_name  = $req->cd_name ?? '';
 
         if (!$dev_info && !$uid)
             return api_result(201, '缺少{dev_info}或会员编号参数');
@@ -40,6 +41,9 @@ class GoodsController extends Controller
             })
             ->when($dev_info, function ($query) use($dev_info){
                 $query->where('dev_info',$dev_info);
+            })
+            ->when($cd_name, function ($query) use($cd_name){
+                $query->where('cd_name', 'like', '%'.$cd_name.'%');
             })
             ->get()
             ->toArray();
