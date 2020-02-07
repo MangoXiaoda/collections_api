@@ -45,6 +45,7 @@ class GoodsController extends Controller
             ->when($cd_name, function ($query) use($cd_name){
                 $query->where('cd_name', 'like', '%'.$cd_name.'%');
             })
+            ->orderby('id', 'desc')
             ->get()
             ->toArray();
 
@@ -74,7 +75,7 @@ class GoodsController extends Controller
             'goods_num' => count($list),
             'cd_desc' => $str
         ];
-        
+
         return $data;
     }
 
