@@ -69,10 +69,13 @@ class GoodsController extends Controller
             $val['cd_style'] = CollJdecode($val['cd_style']);
         }
 
-        $list['goods_num'] = count($list);
-        $list['cd_desc'] = $str;
-
-        return $list;
+        $data = [
+            'list' => $list,
+            'goods_num' => count($list),
+            'cd_desc' => $str
+        ];
+        
+        return $data;
     }
 
     /**
