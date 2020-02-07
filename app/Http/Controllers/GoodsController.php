@@ -48,7 +48,31 @@ class GoodsController extends Controller
             ->get()
             ->toArray();
 
-        return api_result(200, '获取成功', $list);
+        $data = $this->handleCardeList($list);
+
+        return api_result(200, '获取成功', $data);
+    }
+
+    /**
+     * 处理卡片列表数据
+     * @param $list
+     * @return array
+     */
+    private function handleCardeList($list)
+    {
+        if (!$list)
+            return [];
+
+        $str = '';
+        foreach ($list as &$val){
+            $str .= "{$val['cd_name']}、";
+            $val['cd_style'] = CollJdecode($val['cd_style']);
+        }
+
+        $list['goods_num'] = count($list);
+        $list['cd_desc'] = $str;
+
+        return $list;
     }
 
     /**

@@ -78,7 +78,7 @@ function api_result ($code, $desc = '', $data = [], $toJson = false) {
     if (!$toJson)
         return $arr;
 
-    return LexueJencode($arr);
+    return CollJencode($arr);
 }
 
 /**
@@ -96,7 +96,7 @@ function e_result1 ($code, $desc = '', $data = []) {
  * @param $arr 数组
  * @return string 结果字符串
  */
-function LexueJencode ($arr) {
+function CollJencode ($arr) {
     return json_encode($arr, JSON_UNESCAPED_UNICODE);
 }
 
@@ -109,7 +109,7 @@ function LexueJencodeNumCheck ($arr) {
  * @param $str json 字符串
  * @return mixed 结果数据
  */
-function LexueJdecode ($str) {
+function CollJdecode ($str) {
     if (is_array($str))
         return $str;
     return json_decode($str, true);
