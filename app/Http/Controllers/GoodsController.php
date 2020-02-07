@@ -72,7 +72,7 @@ class GoodsController extends Controller
 
         $data = [
             'list' => $list,
-            'goods_num' => count($list),
+            'gd_num' => count($list),
             'cd_desc' => $str
         ];
 
