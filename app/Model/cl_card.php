@@ -10,4 +10,11 @@ class cl_card extends Model
     protected $primaryKey = 'id';
 
     public $timestamps = true;
+
+
+    public function cl_goods()
+    {
+        return $this->hasMany(cl_goods::class, 'cd_id', 'id');
+    }
+
 }

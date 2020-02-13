@@ -36,6 +36,7 @@ class GoodsController extends Controller
             return api_result(201, '缺少{dev_info}或会员编号参数');
 
         $list = cl_card::select('id','uid','dev_info','cd_name','cd_style','tag_id')
+            ->with('cl_goods:gs_name,cd_id')
             ->when($uid, function ($query) use($uid){
                 $query->where('uid',$uid);
             })
@@ -66,17 +67,18 @@ class GoodsController extends Controller
 
         $str = '';
         foreach ($list as &$val){
-            $str .= "{$val['cd_name']}、";
             $val['cd_style'] = CollJdecode($val['cd_style']);
+            $val['gd_num'] = count($val['cl_goods']);
+            foreach ($val['cl_goods'] as $kk => $vv){
+                if ($kk < 4)
+                    $str .= "{$vv['gs_name']}、";
+                break;
+            }
+            $val['cd_desc'] = $str;
+            unset($val['cl_goods']);
         }
 
-        $data = [
-            'list' => $list,
-            'gd_num' => count($list),
-            'cd_desc' => $str
-        ];
-
-        return $data;
+        return $list;
     }
 
     /**
