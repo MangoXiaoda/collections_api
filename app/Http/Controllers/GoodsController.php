@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Model\cl_card;
 use App\Model\cl_goods;
 use Laravel\Lumen\Http\Request;
+use App\Handlers\ImageUploadHandler;
 
 class GoodsController extends Controller
 {
@@ -286,6 +287,21 @@ class GoodsController extends Controller
         cl_goods::where('id', $gs_id)->delete();
 
         return api_result(200, '删除成功');
+    }
+
+
+    private function Api_uploadimage(Request $req)
+    {
+        $image = $req->image ?? '';
+        dd(public_path());
+        $uploader = new ImageUploadHandler();
+
+        if (!$image)
+            return api_result(201, '请上传图片');
+
+        $result = $uploader->save($image, 'goodsimg', 1);
+
+        dd($result);
     }
 
 }

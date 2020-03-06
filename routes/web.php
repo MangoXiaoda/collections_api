@@ -55,4 +55,8 @@ $router->group(['prefix' => 'v1', 'middleware' => ['ApiConfig']], function () us
     # 删除标签接口
     $router->post('/deltag', 'TagController@post');
 
+    # 图片上传接口
+    $router->post('/uploadimage', 'GoodsController@post');
+
+
 });
