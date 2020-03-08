@@ -289,19 +289,24 @@ class GoodsController extends Controller
         return api_result(200, '删除成功');
     }
 
-
+    /**
+     * 图片上传接口
+     * @param Request $req
+     * @return mixed
+     */
     private function Api_uploadimage(Request $req)
     {
         $image = $req->image ?? '';
-        dd(public_path());
-        $uploader = new ImageUploadHandler();
-
         if (!$image)
             return api_result(201, '请上传图片');
 
-        $result = $uploader->save($image, 'goodsimg', 1);
+        $uploader = new ImageUploadHandler();
+        $result = $uploader->save($image, 'goodsimg');
 
-        dd($result);
+        if (!$result)
+            return api_result(202, '上传失败');
+
+        return api_result(200, '上传成功',$result);
     }
 
 }
