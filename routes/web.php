@@ -58,5 +58,8 @@ $router->group(['prefix' => 'v1', 'middleware' => ['ApiConfig']], function () us
     # 图片上传接口
     $router->post('/uploadimage', 'GoodsController@post');
 
+    # 获取图片列表接口
+    $router->get('/imagelist', 'ImagesController@post');
+
 
 });

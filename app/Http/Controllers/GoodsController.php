@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Model\cl_card;
 use App\Model\cl_goods;
+use App\Model\cl_images;
 use Laravel\Lumen\Http\Request;
 use App\Handlers\ImageUploadHandler;
 
@@ -305,6 +306,14 @@ class GoodsController extends Controller
 
         if (!$result)
             return api_result(202, '上传失败');
+
+        // 数据库存入图片地址
+        $cl_images = new cl_images();
+        $cl_images->uid = $req->uid ?? 0;
+        $cl_images->type = $req->type ?? 1;
+        $cl_images->status = $req->status ?? 1;
+        $cl_images->url = $result['path'] ?? '';
+        $cl_images->save();
 
         return api_result(200, '上传成功',$result);
     }
