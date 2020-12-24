@@ -28,7 +28,7 @@ class TagController extends Controller
         if (!$dev_info && !$uid)
             return api_result(201, '缺少{dev_info}或会员编号参数');
 
-        if (!$cd_id) {
+        if (!is_numeric($cd_id)) {
             return api_result(202, '缺少{cd_id}参数');
         }
 
@@ -54,7 +54,7 @@ class TagController extends Controller
         if (!$dev_info && !$uid)
             return api_result(201, '缺少{dev_info}或会员编号参数');
 
-        if (!$cd_id) {
+        if (!is_numeric($cd_id)) {
             return api_result(202, '缺少{cd_id}参数');
         }
 
@@ -64,7 +64,7 @@ class TagController extends Controller
 
         $tag = new cl_tag();
         $tag->parentid = $cd_id;
-        $tag->order = $order;
+        $tag->order = $order ?: mt_rand(1,999);
         $tag->tag_name = $tag_name;
         $tag->save();
 
